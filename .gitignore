@@ -6,6 +6,7 @@ __pycache__/
 *.npy
 *.pyproj
 ui_*.py
+*.h5
 
 # User-specific files
 *.suo
