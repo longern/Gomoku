@@ -114,9 +114,6 @@ class Ui(QtWidgets.QWidget):
 		self.board = Board()
 		self.update()
 
-	#def setDefaultWindowTitle(self):
-
-
 def gui_start():
 	import sys
 	app = QtWidgets.QApplication(sys.argv)
