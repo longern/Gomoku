@@ -19,6 +19,13 @@ class Ui(QtWidgets.QWidget):
 		self.cursor_x = -1
 		self.cursor_y = -1
 
+	def update(self):
+		super().update()
+		if self.board.winner:
+			self.setWindowTitle("Player " + str(self.board.winner) + " wins!")
+		else:
+			self.setWindowTitle("Gomoku")
+
 	def paintEvent(self, QPaintEvent):
 		painter = QtGui.QPainter(self)
 		painter.setBrush(QtCore.Qt.black)
@@ -36,7 +43,6 @@ class Ui(QtWidgets.QWidget):
 		return super().paintEvent(QPaintEvent)
 
 	def drawLastPlayPosition(self, painter, center):
-		print(center)
 		painter.setPen(QtCore.Qt.red)
 		painter.translate(center[0] * self.gridSize[0] + self.boardPos[0], center[1] * self.gridSize[1] + self.boardPos[1])
 		seg = self.gridSize[0] / 8
@@ -93,8 +99,6 @@ class Ui(QtWidgets.QWidget):
 		pos = (chess_x, chess_y)
 		if self.board.in_board(pos):
 			self.board.play(pos)
-		if self.board.winner:
-			self.setWindowTitle("Player " + str(self.board.winner) + " wins!")
 		self.update()
 		return super().mousePressEvent(QMouseEvent)
 
@@ -109,6 +113,9 @@ class Ui(QtWidgets.QWidget):
 			return
 		self.board = Board()
 		self.update()
+
+	#def setDefaultWindowTitle(self):
+
 
 def gui_start():
 	import sys
