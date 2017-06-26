@@ -9,8 +9,20 @@ class Board(object):
 		self.current_player = 1
 		self.winner = 0
 
+	@property
+	def turn(self):
+		return len(self.history)
+
+	@property
+	def shape(self):
+		return self.data.shape
+
 	def in_board(self, pos):
 		return 0 <= pos[0] < self.board_size and 0 <= pos[1] < self.board_size
+
+	def at(self, pos):
+		assert(self.in_board(pos))
+		return self.data[tuple(pos)]
 
 	def play(self, pos):
 		assert self.in_board(pos)
