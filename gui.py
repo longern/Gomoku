@@ -100,14 +100,14 @@ class Ui(QtWidgets.QWidget):
 		if (checked):
 			return
 		self.board = Board()
-		self.setWindowTitle("Gomoku")
+		self.setWindowTitle(QtCore.QCoreApplication.translate("Board", "Gomoku"))
 		self.update()
 
 	def on_btnAi_clicked(self, checked=True):
 		if (checked):
 			return
 		self.board = Board()
-		self.setWindowTitle("Gomoku")
+		self.setWindowTitle(QtCore.QCoreApplication.translate("Board", "Gomoku"))
 		self.update()
 
 def gui_start():
