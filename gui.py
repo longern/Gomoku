@@ -135,6 +135,15 @@ class Ui(QtWidgets.QWidget):
 		self.setWindowTitle(QtCore.QCoreApplication.translate("Board", "Gomoku"))
 		self.afterPlay()
 		self.update()
+
+	def on_btnUndo_clicked(self, checked=True):
+		if checked:
+			return
+		if self.board.turn == 0 or (self.ai == 1 and self.board.turn == 1):
+			return
+		self.board.undo()
+		if self.ai == self.board.current_player:
+			self.board.undo() # Undo two moves if play against AI
 		self.update()
 
 def gui_start():
