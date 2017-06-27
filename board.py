@@ -56,8 +56,6 @@ class Board(object):
 				count += 1
 			if count == 5:
 				self.winner = self.current_player
-			elif count > 5:
-				self.winner = -1
 		if len(self.history) == self.board_size * self.board_size:
 			self.winner = -1
 		return self.winner
