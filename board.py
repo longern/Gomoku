@@ -37,6 +37,8 @@ class Board(object):
 		assert self.history
 		last_move = self.history.pop()
 		self.data[last_move[0]][last_move[1]] = 0
+		self.winner = 0
+		self.current_player = 2 if self.current_player == 1 else 1
 
 	def check_winner(self):
 		assert self.history
