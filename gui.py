@@ -3,6 +3,8 @@ os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ui.ui_board import Ui_Board
 from board import Board
+from gomoku_ai import ai_move
+import random
 
 class Ui(QtWidgets.QWidget):
 	boardPos = (28, 28)
@@ -14,7 +16,9 @@ class Ui(QtWidgets.QWidget):
 		super(Ui, self).__init__(parent)
 		self.ui = Ui_Board()
 		self.ui.setupUi(self)
+		self.ui.choosePanel.hide()
 		self.board = Board()
+		self.ai = 0
 		self.cursor_x = -1
 		self.cursor_y = -1
 
@@ -89,17 +93,37 @@ class Ui(QtWidgets.QWidget):
 		chess_x = int(round((QMouseEvent.x() - self.boardPos[0]) / self.gridSize[0]))
 		chess_y = int(round((QMouseEvent.y() - self.boardPos[1]) / self.gridSize[1]))
 		pos = (chess_x, chess_y)
-		if self.board.in_board(pos):
+		if self.board.in_board(pos) and self.board.at(pos) == 0:
 			self.board.play(pos)
-		if self.board.winner:
-			self.setWindowTitle("Player " + str(self.board.winner) + " wins!")
+			self.afterPlay()
 		self.update()
 		return super().mousePressEvent(QMouseEvent)
+
+	winning_message = {
+		-1: "Draw!",
+		1: "Black wins!",
+		2: "White wins!"
+	}
+
+	def afterPlay(self):
+		if self.board.winner:
+			self.setWindowTitle(self.winning_message[self.board.winner])
+			return
+		if self.ai == self.board.current_player:
+			self.board.play(ai_move(self.board))
+			self.afterPlay()
+		else:
+			if self.ui.chkSwap2.checkState() == QtCore.Qt.Checked:
+				if self.board.turn == 3:
+					self.setWindowTitle("Swap 1")
+				elif self.board.turn == 5:
+					self.setWindowTitle("Swap 2")
 
 	def on_btnHuman_clicked(self, checked=True):
 		if checked:
 			return
 		self.board = Board()
+		self.ai = 0
 		self.setWindowTitle(QtCore.QCoreApplication.translate("Board", "Gomoku"))
 		self.update()
 
@@ -107,7 +131,10 @@ class Ui(QtWidgets.QWidget):
 		if checked:
 			return
 		self.board = Board()
+		self.ai = random.randint(1, 2)
 		self.setWindowTitle(QtCore.QCoreApplication.translate("Board", "Gomoku"))
+		self.afterPlay()
+		self.update()
 		self.update()
 
 def gui_start():
