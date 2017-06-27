@@ -97,14 +97,14 @@ class Ui(QtWidgets.QWidget):
 		return super().mousePressEvent(QMouseEvent)
 
 	def on_btnHuman_clicked(self, checked=True):
-		if (checked):
+		if checked:
 			return
 		self.board = Board()
 		self.setWindowTitle(QtCore.QCoreApplication.translate("Board", "Gomoku"))
 		self.update()
 
 	def on_btnAi_clicked(self, checked=True):
-		if (checked):
+		if checked:
 			return
 		self.board = Board()
 		self.setWindowTitle(QtCore.QCoreApplication.translate("Board", "Gomoku"))
