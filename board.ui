@@ -10,6 +10,12 @@
     <height>520</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="mouseTracking">
    <bool>true</bool>
   </property>
@@ -19,25 +25,25 @@
   <property name="styleSheet">
    <string notr="true">background-color: #cfa844</string>
   </property>
-  <widget class="QPushButton" name="btnConcede">
+  <widget class="QPushButton" name="btnUndo">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>520</x>
      <y>440</y>
-     <width>91</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Concede</string>
+    <string>Undo</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btnHuman">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>520</x>
      <y>60</y>
-     <width>91</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
@@ -48,9 +54,9 @@
   <widget class="QPushButton" name="btnAi">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>520</x>
      <y>100</y>
-     <width>91</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
@@ -61,15 +67,77 @@
   <widget class="QPushButton" name="btnExit">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>520</x>
      <y>480</y>
-     <width>91</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Exit</string>
    </property>
+  </widget>
+  <widget class="QCheckBox" name="chkSwap2">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>150</y>
+     <width>73</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Swap2</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="choosePanel" native="true">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>160</y>
+     <width>181</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <widget class="QPushButton" name="btnBlack">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Black</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnWhite">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>80</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>White</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnTwoTurns">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>130</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Two more turns</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
