@@ -2,12 +2,12 @@ import numpy
 from keras.utils import to_categorical
 from board import Board
 
-channel_size = 21
+channel_size = 22
 
 def get_channels(board: Board, pos: numpy.array):
 	directions = numpy.array([(1, -1), (1, 0), (1, 1), (0, 1)])
 	channels = numpy.zeros(channel_size)
-	channels[0:3] = to_categorical(board.data[pos], 3)
+	channels[0:3] = to_categorical(board.at(pos), 3)
 	enemy = lambda x: 3 - x
 	for player in [1, 2]:
 		max_count = (0, 0)
@@ -37,10 +37,11 @@ def get_channels(board: Board, pos: numpy.array):
 		else:
 			channels[12:18] = to_categorical(max_count[0], 6)
 			channels[18:21] = to_categorical(max_count[1], 3)
+	channels[21] = board.current_player - 1
 	return channels
 
 def get_features(board: Board):
-	feature = numpy.zeros((15, 15, channel_size))
+	feature = numpy.zeros((*board.shape, channel_size))
 	for pos, _ in numpy.ndenumerate(board.data):
 		feature[pos] = get_channels(board, pos)
 	return feature
