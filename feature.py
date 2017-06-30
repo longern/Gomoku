@@ -45,3 +45,22 @@ def get_features(board: Board):
 	for pos, _ in numpy.ndenumerate(board.data):
 		feature[pos] = get_channels(board, pos)
 	return feature
+
+def update_feature(board: Board, feature, move):
+	pos_to_update = []
+	for dir in numpy.array([(1, -1), (1, 0), (1, 1), (0, 1)]):
+		for i in range(1, 6):
+			if board.in_board(move + i * dir):
+				pos_to_update.append(move + i * dir)
+			else:
+				break
+		for i in range(-1, -6, -1):
+			if board.in_board(move + i * dir):
+				pos_to_update.append(move + i * dir)
+			else:
+				break
+	pos_to_update.append(move)
+	for pos in map(tuple, pos_to_update):
+		feature[pos] = get_channels(board, pos)
+	for pos, _ in numpy.ndenumerate(board.data):
+		feature[pos][21] = board.current_player - 1
