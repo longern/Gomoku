@@ -4,10 +4,7 @@ class Board(object):
 	board_size = 15
 
 	def __init__(self):
-		self.data = np.zeros((self.board_size, self.board_size), int)
-		self.history = []
-		self.current_player = 1
-		self.winner = 0
+		self.reset()
 
 	@property
 	def turn(self):
@@ -61,3 +58,9 @@ class Board(object):
 		if len(self.history) == self.board_size * self.board_size:
 			self.winner = -1
 		return self.winner
+
+	def reset(self):
+		self.data = np.zeros((self.board_size, self.board_size), int)
+		self.history = []
+		self.current_player = 1
+		self.winner = 0
